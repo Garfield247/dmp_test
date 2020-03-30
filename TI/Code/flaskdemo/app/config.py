@@ -9,6 +9,12 @@ class Config():
     # 数据库相关设置
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_COMMIT_ON_REARDOWN = True
+
+    DROPZONE_MAX_FILE_SIZE = 1024
+    DROPZONE_INPUT_NAME = file
+    DROPZONE_UPLOAD_MULTPLE = True
+    DROPZONE_TIMEOUT = 120
+    UPLOADED_PATH = os.path.join(base_dir,"uploads")
     @staticmethod
     def init_app(app):
         pass
