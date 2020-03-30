@@ -1,6 +1,6 @@
+import os
 from flask_script import Manager,Server
 from app import create_app
-from app.extensions import config_extensions
 
 # 获取配置名称
 config_name = os.environ.get("FLASK_CONFIG") or 'default'
