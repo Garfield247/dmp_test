@@ -10,6 +10,7 @@ class Config():
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_COMMIT_ON_REARDOWN = True
 
+    UPLOADED_PATH = os.path.join(base_dir,"uploads")
     @staticmethod
     def init_app(app):
         pass
