@@ -1,12 +1,11 @@
-from flask_dropzone import Dropzone
+from flask_cors import CORS
 
 
 
-dropzone = Dropzone()
 
 
 def config_extensions(app):
-    dropzone.init_app(app)
+    CORS(app,supports_credentials=True)
 
 
 

@@ -9,7 +9,7 @@ app = create_app(config_name)
 # 使用Manager对APP进行接管
 manager = Manager(app)
 # 添加服务启动的命令行脚本
-manager.add_command("runserver",Server(host="0.0.0.0",port=5555))
+manager.add_command("runserver",Server(host="0.0.0.0",port=5555,use_debugger=True))
 
 
 
