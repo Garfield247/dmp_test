@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint,request
+from flask import Blueprint,request,current_app
 
 
 data = Blueprint('date',__name__)
@@ -32,10 +32,10 @@ def upload_success():                               # 所有分片均上传完�
     target_filename = request.args.get('filename')
     task = request.args.get('task_id')
     chunk = 0
-    with open((os.path.join(current_app.config.get("UPLOADED_PATH"),target_filename), 'wb') as target_file:
+    with open(os.path.join(current_app.config.get("UPLOADED_PATH"),target_filename), 'wb') as target_file:
         while True:
             try:
-                filename = (os.path.join(current_app.config.get("UPLOADED_PATH"),'%s%d' % (
+                filename = os.path.join(current_app.config.get("UPLOADED_PATH"),'%s%d' % (
       task, chunk))
                 source_file = open(filename, 'rb')                    # 按序打开每个分片
                 target_file.write(source_file.read())                 # 读取分片内容写入新文件
