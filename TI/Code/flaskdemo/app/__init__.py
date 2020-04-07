@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from celery import Celery
 from app.config import config
 from app.extensions import config_extensions
 from app.views import config_blueprint
