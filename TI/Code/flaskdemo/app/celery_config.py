@@ -1,4 +1,3 @@
-
 broker_url = 'redis://0.0.0.0:6379/1'
 result_backend = 'redis://0.0.0.0:6379/2'
 

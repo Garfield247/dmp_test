@@ -1,15 +1,17 @@
-import os
+
 from flask import Flask
-from celery import Celery
-from app.config import config
 from app.extensions import config_extensions
 from app.views import config_blueprint
-from app.celery_config import *
-
+from app.utils import celery_app
+from app.config import config
 
 def create_app(config_name):
     # 创建flask实例
     app = Flask(__name__)
+    celery_app.config_from_object('app.celery_config')
+    # celery_app.conf.update({"broker_url": 'redis://127.0.0.1:6379/0',
+
+    #                         "result_backend": 'redis://127.0.0.1:6379/1', })
     # 载入配置
     app.config.from_object(config.get(config_name) or config['default'])
     # 初始化配置
@@ -21,24 +23,3 @@ def create_app(config_name):
     return app
 
 
-# celery
-def make_celery(app):
-    celery = Celery(__name__,broker=broker_url)
-    celery.config_from_object('celery_config')
-    TaskBase = celery.Task
-
-    class ContextTask(TaskBase):
-        abstract = True
-
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return TaskBase.__call__(self, *args, **kwargs)
-
-    celery.Task = ContextTask
-    return celery
-
-# 获取配置名称
-config_name = os.environ.get("FLASK_CONFIG") or 'default'
-# 创建应用实例
-dmp_app = create_app(config_name)
-celery_ = make_celery(dmp_app)
