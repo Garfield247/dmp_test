@@ -11,6 +11,9 @@ class Config():
     SQLALCHEMY_COMMIT_ON_REARDOWN = True
 
     UPLOADED_PATH = os.path.join(base_dir,"uploads")
+
+    CELERY_BROKER_URL='redis://0.0.0.0:6379/0'
+    CELERY_RESULT_BACKEND='redis://0.0.0.0:6379/0'
     @staticmethod
     def init_app(app):
         pass
