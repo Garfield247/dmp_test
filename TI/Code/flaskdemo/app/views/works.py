@@ -1,6 +1,7 @@
 from flask import Blueprint
 from app.utils import ftp_server_hanlder
 from app.utils.celery_tools import test
+from app.utils import celery_app
 
 
 work = Blueprint("work",__name__)
@@ -20,3 +21,10 @@ def ffffff():
     port = 3475
     res = ftp_server_hanlder.delay(username,passwd,homedir,port)
     return res.id
+
+
+
+
+@work.route("/killtask/<task_id>")
+def killer(task_id):
+    celery_app.control.revoke(task_id, terminate=True)
