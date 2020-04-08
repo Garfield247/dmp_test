@@ -1,1 +1,1 @@
-celery -A manage:celery_app worker  -l info -P gevent -c 10
+celery -A manage:celery_app worker  -l info
