@@ -4,14 +4,13 @@ from app.extensions import config_extensions
 from app.views import config_blueprint
 from app.utils import celery_app
 from app.config import config
+# from app.celery_config import celery_conf
 
 def create_app(config_name):
     # 创建flask实例
     app = Flask(__name__)
-    celery_app.config_from_object('app.celery_config')
-    # celery_app.conf.update({"broker_url": 'redis://127.0.0.1:6379/0',
-
-    #                         "result_backend": 'redis://127.0.0.1:6379/1', })
+    # celery_app.config_from_object('app.celery_config')
+    # celery_app.conf.update(celery_conf)
     # 载入配置
     app.config.from_object(config.get(config_name) or config['default'])
     # 初始化配置
