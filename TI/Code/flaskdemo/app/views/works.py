@@ -28,3 +28,4 @@ def ffffff():
 @work.route("/killtask/<task_id>")
 def killer(task_id):
     celery_app.control.revoke(task_id, terminate=True)
+    return "OK"
